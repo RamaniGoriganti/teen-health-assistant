@@ -73,7 +73,7 @@ mcp_tools = McpToolset(
 health_assessor = LlmAgent(
     name="health_assessor",
     model=config.model,
-    mode="single_turn",
+    mode="chat",
     instruction=(
         "You are a Health Assessment Specialist for teenage girls. "
         "Your role is to analyze health concerns (e.g. fatigue, irregular periods, sleep issues) "
@@ -88,7 +88,7 @@ health_assessor = LlmAgent(
 diet_planner = LlmAgent(
     name="diet_planner",
     model=config.model,
-    mode="single_turn",
+    mode="chat",
     instruction=(
         "You are a Diet & Lifestyle Planner for teenage girls. "
         "Your role is to provide nutrition advice, healthy reminders, and customized weekly diet plans. "
@@ -105,7 +105,7 @@ diet_planner = LlmAgent(
 orchestrator = LlmAgent(
     name="orchestrator",
     model=config.model,
-    mode="single_turn",
+    mode="chat",
     instruction=(
         "You are the Teen Health Assistant Orchestrator. You help teenage girls, parents, and "
         "counselors manage teenage health, diet planning, tracking, and reminders. "
