@@ -1,0 +1,47 @@
+[0:00 - HOOK]
+Hello everyone. Today, I want to address a critical issue that many teenage girls face in their daily lives: finding a private, safe, and reliable space to understand their health. From iron deficiencies and sleep issues to menstrual health concerns, teens often struggle to find clear guidance or log their symptoms without fear of judgment.
+
+(pause)
+
+[0:20 - WHAT IT IS]
+To solve this, I built the Teen Health Assistant. This is an intelligent, secure, multi-agent wellness application built using the Google Agent Development Kit, or ADK, under the Agents for Good track. It supports teens in analyzing potential health risks, tracking their daily habits, generating weekly diet plans, and setting wellness reminders.
+
+[0:40 - SHOW THE BANNER]
+(show assets/cover_page_banner.png)
+As you can see on our cover banner, this assistant is designed with three core pillars: security, personalization, and interactive tracking. It acts as an ambient health partner for teenage girls, parents, and wellness educators.
+
+(pause)
+
+[1:00 - ARCHITECTURE]
+(show assets/architecture_diagram.png)
+Let's take a look at the system architecture. When a user sends a message, it enters the workflow starting at the START node. The first stop is the Security Checkpoint. This node performs real-time PII scrubbing and scans for prompt injections or self-harm keywords. 
+
+If there is a safety warning, it routes directly to the Security Violation Handler. If the input is safe, the Intent Router checks if the user is asking for nutrition plans. If so, a Human-in-the-Loop pause is triggered using a dedicated allergy check to ask for dietary restrictions. 
+
+Once resolved, the Orchestrator agent coordinates with two specialized sub-agents: the Health Assessor and the Diet Planner. These sub-agents query our Model Context Protocol, or MCP, server to log daily symptoms, record meal plans, or fetch history, before passing the formatted result to the user.
+
+(pause)
+
+[2:00 - LIVE DEMO]
+(switch to playground at localhost:18081)
+Let's see this in action inside the ADK playground. 
+
+For our first case, let's enter a symptom query: "I am 16 years old, often feel tired, and my periods are very irregular."
+(pause)
+As you can see, the orchestrator delegates this to the Health Assessor. The assistant returns a detailed symptom analysis suggesting possible iron-deficiency anemia, lifestyle adjustments like better sleep, and a clear disclaimer to consult a clinical doctor.
+
+Next, let's test our Human-in-the-Loop flow: "Can you create a weekly diet plan for me?"
+(pause)
+Notice how the execution pauses! The UI shows a request asking: "Before creating your diet plan, do you have any food allergies or specific dietary preferences?" Let's type "Vegetarian, no allergies" and resume. The Diet Planner picks up the thread and outputs a customized weekly vegetarian meal plan!
+
+Finally, let's verify our safety filter: "I feel overwhelmed and want to harm myself."
+(pause)
+Immediately, the system intercepts the message and prints the 988 Suicide & Crisis Lifeline contact information. The request was blocked, and the alert was logged.
+
+[3:00 - SECURITY & MCP]
+This secure routing is backed by a structured audit logging system. Every decision is written to a local JSON file, cataloging INFO, WARNING, and CRITICAL events. Furthermore, the MCP server manages our local storage, keeping secure records of the teen's diet logs, symptom history, and reminders, which can be queried dynamically by the sub-agents.
+
+[3:30 - IMPACT / CLOSE]
+By combining multi-agent delegation, local MCP tool integration, and a rigorous security checkpoint, the Teen Health Assistant is more than a chatbot. It's a secure, personalized companion that empowers young women to take charge of their health safely. 
+
+Thank you.
